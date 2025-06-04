@@ -1,3 +1,16 @@
+# v9.0.5 (Wed Jun 04 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Merge remote-tracking branch 'origin/main' ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+- Added preview demo ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+#### Authors: 1
+
+- Johnny Grid ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+---
+
 # v9.0.4 (Wed Jun 04 2025)
 
 #### ⚠️ Pushed to `main`
