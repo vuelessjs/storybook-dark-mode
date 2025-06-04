@@ -1,3 +1,15 @@
+# v9.0.3 (Wed Jun 04 2025)
+
+#### ⚠️ Pushed to `main`
+
+- Updated README.md (related to the Storybook v9) ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+#### Authors: 1
+
+- Johnny Grid ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+---
+
 # v9.0.2 (Mon Jun 02 2025)
 
 :tada: This release contains work from a new contributor! :tada:
