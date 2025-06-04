@@ -2,7 +2,7 @@
 
 A Storybook v9-optimized addon that enables users to toggle between dark and light modes. For support with earlier Storybook versions, see the [original addon](https://github.com/hipstersmoothie/storybook-dark-mode).
 
-The project is supported and maintained by the [Vueless UI](https://github.com/vuelessjs/vueless) core team.
+The project is supported and maintained by the [Vueless UI](https://github.com/vuelessjs/vueless) core team. | [See the demo](https://ui.vueless.com) 🌗
 
 ![Example](./example.gif)
 
