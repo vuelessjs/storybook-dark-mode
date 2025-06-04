@@ -27,7 +27,7 @@ export default {
 Configure the dark and light mode by adding the following to your `.storybook/preview.js` file:
 
 ```js
-import { themes } from '@storybook/theming';
+import { themes } from 'storybook/theming';
 
 export const parameters = {
   darkMode: {
@@ -121,7 +121,6 @@ If your components use a custom Theme provider, you can integrate it by using th
 
 ```js
 import { useDarkMode } from '@vueless/storybook-dark-mode';
-import { addDecorator } from '@storybook/react';
 
 // your theme provider
 import ThemeContext from './theme';
@@ -136,7 +135,7 @@ function ThemeWrapper(props) {
   );
 }
 
-export const decorators = [renderStory => <ThemeWrapper>{renderStory()}</ThemeWrapper>)];
+export const decorators = [renderStory => <ThemeWrapper>{renderStory()}</ThemeWrapper>];
 ```
 
 #### Theme Knobs
@@ -144,7 +143,7 @@ export const decorators = [renderStory => <ThemeWrapper>{renderStory()}</ThemeWr
 If you want to have you UI's dark mode separate from you components' dark mode, implement this global decorator:
 
 ```js
-import { themes } from '@storybook/theming';
+import { themes } from 'storybook/theming';
 
 // Add a global decorator that will render a dark background when the
 // "Color Scheme" knob is set to dark
@@ -178,8 +177,8 @@ export const decorators = [knobDecorator];
 You can also listen for the `DARK_MODE` event via the addons channel.
 
 ```js
-import { addons } from '@storybook/preview-api';
-import { addDecorator } from '@storybook/react';
+import { useEffect } from 'react';
+import { addons } from 'storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 
 // your theme provider
@@ -207,7 +206,7 @@ function ThemeWrapper(props) {
   );
 }
 
-export const decorators = [renderStory => <ThemeWrapper>{renderStory()}</ThemeWrapper>)];
+export const decorators = [renderStory => <ThemeWrapper>{renderStory()}</ThemeWrapper>];
 ```
 
 Since in docs mode, Storybook will not display its toolbar,
@@ -216,9 +215,9 @@ By editing your `.storybook/preview.js`.
 
 ```js
 import React from 'react';
-import { addons } from '@storybook/preview-api';
+import { addons } from 'storybook/preview-api';
 import { DocsContainer } from '@storybook/addon-docs';
-import { themes } from '@storybook/theming';
+import { themes } from 'storybook/theming';
 
 import {
   DARK_MODE_EVENT_NAME,
