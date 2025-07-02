@@ -1,6 +1,6 @@
 {
   "name": "@vueless/storybook-dark-mode",
-  "version": "9.0.5",
+  "version": "9.0.6",
   "description": "Toggle between light and dark mode in Storybook",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
