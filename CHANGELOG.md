@@ -1,3 +1,19 @@
+# v9.0.6 (Wed Jul 02 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, nilscox ([@nilscox](https://github.com/nilscox)), for all your work!
+
+#### 🐛 Bug Fix
+
+- Update @storybook/icons [#1](https://github.com/vuelessjs/storybook-dark-mode/pull/1) ([@nilscox](https://github.com/nilscox))
+
+#### Authors: 1
+
+- nilscox ([@nilscox](https://github.com/nilscox))
+
+---
+
 # v9.0.5 (Wed Jun 04 2025)
 
 #### ⚠️ Pushed to `main`
