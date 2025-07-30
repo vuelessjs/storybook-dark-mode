@@ -246,7 +246,7 @@ import { useMantineColorScheme } from '@mantine/core'
  **/
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
   const { setColorScheme } = useMantineColorScheme()
-const handleColorScheme = useCallback((value: boolean) => setColorScheme(value ? 'dark' : 'light'), [setColorScheme])
+  const handleColorScheme = useCallback((value: boolean) => setColorScheme(value ? 'dark' : 'light'), [setColorScheme])
   useOnDarkModeEvent(handleColorScheme)
 
   return children
