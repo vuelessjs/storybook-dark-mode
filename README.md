@@ -181,7 +181,7 @@ You can also listen for the `DARK_MODE` event via the addons channel.
 You can listen for events on the channel with React hooks:
 
 ```js
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { addons } from 'storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 
@@ -191,19 +191,19 @@ const channel = addons.getChannel()
  * Use this hook if you want to pass in your own callback, e.g. Mantine's `setColorScheme`
  **/
 export function useOnDarkModeEvent(callback) {
-    useEffect(function () {
-        channel.on(DARK_MODE_EVENT_NAME, callback)
-        return () => channel.off(DARK_MODE_EVENT_NAME, callback)
-    })
+  useEffect(function () {
+    channel.on(DARK_MODE_EVENT_NAME, callback)
+    return () => channel.off(DARK_MODE_EVENT_NAME, callback)
+  })
 }
 
 /**
  * Use this hook if you only need to know whether dark mode is toggled on
  **/
 export function useIsDarkMode() {
-    const [isDarkMode, setIsDarkMode] = useState<boolean>()
-    useOnDarkModeEvent(setIsDarkMode)
-    return isDarkMode
+  const [isDarkMode, setIsDarkMode] = useState()
+  useOnDarkModeEvent(setIsDarkMode)
+  return isDarkMode
 }
 ```
 
@@ -239,16 +239,17 @@ Some UI libraries expose hooks for controlling the theme. E.g., if you are using
 
 ```js
 import { useOnDarkModeEvent } from './hooks'; // the hook we defined above
+import { useMantineColorScheme } from '@mantine/core'
 
 /**
  * Custom story wrapper that handles Mantine's dark mode
  **/
 function ThemeWrapper({ children }: { children: React.ReactNode }) {
-    const { setColorScheme } = useMantineColorScheme()
+  const { setColorScheme } = useMantineColorScheme()
 const handleColorScheme = useCallback((value: boolean) => setColorScheme(value ? 'dark' : 'light'), [setColorScheme])
-    useOnDarkModeEvent(handleColorScheme)
+  useOnDarkModeEvent(handleColorScheme)
 
-    return children
+  return children
 }
 
 export const decorators = [
