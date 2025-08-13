@@ -1,3 +1,15 @@
+# v9.0.7 (Wed Aug 13 2025)
+
+#### 🐛 Bug Fix
+
+- How to: Apply dark mode to docs [#2](https://github.com/vuelessjs/storybook-dark-mode/pull/2) ([@twiddler](https://github.com/twiddler))
+
+#### Authors: 1
+
+- [@twiddler](https://github.com/twiddler)
+
+---
+
 # v9.0.6 (Wed Jul 02 2025)
 
 :tada: This release contains work from a new contributor! :tada:
