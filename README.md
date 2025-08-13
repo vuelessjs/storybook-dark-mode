@@ -176,38 +176,112 @@ export const decorators = [knobDecorator];
 
 You can also listen for the `DARK_MODE` event via the addons channel.
 
+#### Listening for events
+
+You can listen for events on the channel with React hooks:
+
 ```js
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { addons } from 'storybook/preview-api';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
 
+const channel = addons.getChannel()
+
+/**
+ * Use this hook if you want to pass in your own callback, e.g. Mantine's `setColorScheme`
+ **/
+export function useOnDarkModeEvent(callback) {
+  useEffect(function () {
+    channel.on(DARK_MODE_EVENT_NAME, callback)
+    return () => channel.off(DARK_MODE_EVENT_NAME, callback)
+  })
+}
+
+/**
+ * Use this hook if you only need to know whether dark mode is toggled on
+ **/
+export function useIsDarkMode() {
+  const [isDarkMode, setIsDarkMode] = useState()
+  useOnDarkModeEvent(setIsDarkMode)
+  return isDarkMode
+}
+```
+
+You can then use these hooks to theme stories and docs (see below).
+
+#### Theming stories
+
+You can use the hooks above with your `ThemeContext`:
+
+```js
+import { useIsDarkMode } from './hooks'; // the hook we defined above
 // your theme provider
 import ThemeContext from './theme';
 
-// get channel to listen to event emitter
-const channel = addons.getChannel();
-
-// create a component that listens for the DARK_MODE event
+// create a component that uses the dark mode hook
 function ThemeWrapper(props) {
-  // this example uses hook but you can also use class component as well
-  const [isDark, setDark] = useState(false);
-
-  useEffect(() => {
-    // listen to DARK_MODE event
-    channel.on(DARK_MODE_EVENT_NAME, setDark);
-    return () => channel.off(DARK_MODE_EVENT_NAME, setDark);
-  }, [channel, setDark]);
+  const isDarkMode = useIsDarkMode();
 
   // render your custom theme provider
   return (
-    <ThemeContext.Provider value={isDark ? darkTheme : defaultTheme}>
+    <ThemeContext.Provider value={isDarkMode ? darkTheme : defaultTheme}>
       {props.children}
     </ThemeContext.Provider>
   );
 }
 
-export const decorators = [renderStory => <ThemeWrapper>{renderStory()}</ThemeWrapper>];
+export const decorators = [
+  (renderStory) => <ThemeWrapper>{renderStory()}</ThemeWrapper>,
+];
 ```
+
+Some UI libraries expose hooks for controlling the theme. E.g., if you are using Mantine, you can use this component:
+
+```js
+import { useOnDarkModeEvent } from './hooks'; // the hook we defined above
+import { useMantineColorScheme } from '@mantine/core'
+
+/**
+ * Custom story wrapper that handles Mantine's dark mode
+ **/
+function ThemeWrapper({ children }: { children: React.ReactNode }) {
+  const { setColorScheme } = useMantineColorScheme()
+  const handleColorScheme = useCallback((value) => setColorScheme(value ? 'dark' : 'light'), [setColorScheme])
+  useOnDarkModeEvent(handleColorScheme)
+
+  return children
+}
+
+export const decorators = [
+  (renderStory) => <ThemeWrapper>{renderStory()}</ThemeWrapper>,
+];
+```
+
+#### Theming docs
+
+Docs have a dedicated container component which will _not_ be themed unless you explicitly configure it:
+
+```js
+import { useIsDarkMode } from './hooks'; // the hook we defined above
+
+function ThemedDocsContainer(props) {
+  const isDarkMode = useIsDarkMode() // the hook we defined above
+
+  return (
+    <DocsContainer theme={isDarkMode ? themes.dark : themes.light} context={props.context}>
+      {props.children}
+    </DocsContainer>
+  )
+}
+
+export const parameters = {
+  docs: {
+    container: ThemedDocsContainer,
+  },
+},
+```
+
+#### Emit event in docs mode
 
 Since in docs mode, Storybook will not display its toolbar,
 You can also trigger the `UPDATE_DARK_MODE` event via the addons channel if you want to control that option in docs mode,
