@@ -11,10 +11,6 @@
     "preset.js"
   ],
   "author": "Johnny Grid <hello@vueless.com> (https://vueless.com)",
-  "keywords": [
-    "storybook-addons",
-    "appearance"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/vuelessjs/storybook-dark-mode"
@@ -24,39 +20,39 @@
   },
   "scripts": {
     "clean": "rimraf ./dist",
-    "buildBabel": "concurrently \"yarn buildBabel:cjs\" \"yarn buildBabel:esm\"",
+    "buildBabel": "concurrently \"npm run buildBabel:cjs\" \"npm run buildBabel:esm\"",
     "buildBabel:cjs": "babel ./src -d ./dist/cjs --extensions \".js,.jsx,.ts,.tsx\"",
     "buildBabel:esm": "babel ./src -d ./dist/esm --env-name esm --extensions \".js,.jsx,.ts,.tsx\"",
     "buildTsc": "tsc --declaration --emitDeclarationOnly --outDir ./dist/ts -p tsconfig.build.json",
-    "prebuild": "yarn clean",
-    "build": "concurrently \"yarn buildBabel\" \"yarn buildTsc\"",
-    "build:watch": "concurrently \"yarn buildBabel:esm -- --watch\" \"yarn buildTsc -- --watch\"",
+    "prebuild": "npm run clean",
+    "build": "concurrently \"npm run buildBabel\" \"npm run buildTsc\"",
+    "build:watch": "concurrently \"npm run buildBabel:esm -- --watch\" \"npm run buildTsc -- --watch\"",
     "lint": "eslint --ext .ts --ext .tsx src/**",
     "release": "auto shipit"
   },
   "dependencies": {
     "@storybook/global": "^5.0.0",
-    "@storybook/icons": "^1.2.5",
+    "@storybook/icons": "^1.4.0",
     "fast-deep-equal": "^3.1.3",
     "memoizerific": "^1.11.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
-    "@babel/core": "^7.20.5",
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
-    "@storybook/builder-vite": "^9.0.0",
-    "@storybook/react": "^9.0.0",
-    "@storybook/react-vite": "^9.0.0",
-    "@types/node": "^18.11.11",
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@storybook/builder-vite": "^9.1.3",
+    "@storybook/react": "^9.1.3",
+    "@storybook/react-vite": "^9.1.3",
+    "@types/node": "^24.3.0",
     "@types/react": "^18.0.26",
     "@typescript-eslint/eslint-plugin": "5.45.1",
     "@typescript-eslint/parser": "5.45.1",
-    "all-contributors-cli": "^6.24.0",
-    "auto": "^11.1.1",
-    "auto-config-hipstersmoothie": "^4.0.0",
-    "babel-loader": "^8.3.0",
+    "all-contributors-cli": "^3.1.1",
+    "auto": "^9.10.4",
+    "auto-config-hipstersmoothie": "^3.0.24",
+    "babel-loader": "^10.0.0",
     "concurrently": "^7.6.0",
     "eslint": "8.29.0",
     "eslint-config-prettier": "8.5.0",
@@ -68,10 +64,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
-    "storybook": "^9.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.3",
-    "vite": "^5.1.3"
+    "storybook": "^9.1.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4"
   },
   "auto": {
     "extends": "hipstersmoothie"
@@ -82,6 +78,8 @@
   "engines": {
     "node": ">=20"
   },
-  "license": "MIT",
-  "packageManager": "yarn@1.22.19+sha512.ff4579ab459bb25aa7c0ff75b62acebe576f6084b36aa842971cf250a5d8c6cd3bc9420b22ce63c7f93a0857bc6ef29291db39c3e7a23aab5adfd5a4dd6c5d71"
+  "keywords": [
+    "storybook-addons",
+    "appearance"
+  ]
 }

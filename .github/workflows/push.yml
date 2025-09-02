@@ -19,6 +19,6 @@ jobs:
           node-version: 22.x
       - name: npm install, build, and lint
         run: |
-          yarn
-          yarn build
-          yarn lint
+          npm install
+          npm run build
+          npm run lint
