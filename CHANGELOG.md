@@ -1,3 +1,16 @@
+# v9.0.8 (Tue Sep 02 2025)
+
+#### 🐛 Bug Fix
+
+- Updated packages [#6](https://github.com/vuelessjs/storybook-dark-mode/pull/6) ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+- Update dependancies [#5](https://github.com/vuelessjs/storybook-dark-mode/pull/5) ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+#### Authors: 1
+
+- Johnny Grid ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+---
+
 # v9.0.7 (Wed Aug 13 2025)
 
 #### 🐛 Bug Fix
