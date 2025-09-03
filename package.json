@@ -49,7 +49,7 @@
     "@types/react": "^18.0.26",
     "@typescript-eslint/eslint-plugin": "5.45.1",
     "@typescript-eslint/parser": "5.45.1",
-    "all-contributors-cli": "^3.1.1",
+    "all-contributors-cli": "^6.26.1",
     "auto": "^9.10.4",
     "auto-config-hipstersmoothie": "^3.0.24",
     "babel-loader": "^10.0.0",
