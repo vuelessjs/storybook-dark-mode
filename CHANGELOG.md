@@ -1,3 +1,20 @@
+# v9.0.9 (Wed Oct 01 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Molodtsov Fillip ([@Fillip-Molodtsov](https://github.com/Fillip-Molodtsov)), for all your work!
+
+#### 🐛 Bug Fix
+
+- fix: useDarkMode produces infinite re-renders when using in a decorator [#12](https://github.com/vuelessjs/storybook-dark-mode/pull/12) (fillip.molodtsov@tngtech.com [@Fillip-Molodtsov](https://github.com/Fillip-Molodtsov))
+
+#### Authors: 2
+
+- Fillip Molodtsov (fillip.molodtsov@tngtech.com)
+- Molodtsov Fillip ([@Fillip-Molodtsov](https://github.com/Fillip-Molodtsov))
+
+---
+
 # v9.0.8 (Tue Sep 02 2025)
 
 #### 🐛 Bug Fix
