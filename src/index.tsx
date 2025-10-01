@@ -6,7 +6,7 @@ import { store } from './Tool';
  * Returns the current state of storybook's dark-mode
  */
 export function useDarkMode(): boolean {
-  const [isDark, setIsDark] = useState(store().current === 'dark');
+  const [isDark, setIsDark] = useState(() => store().current === 'dark');
 
   useEffect(() => {
     const chan = addons.getChannel();
