@@ -262,6 +262,7 @@ export const decorators = [
 Docs have a dedicated container component which will _not_ be themed unless you explicitly configure it:
 
 ```js
+import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { useIsDarkMode } from './hooks'; // the hook we defined above
 
 function ThemedDocsContainer(props) {
@@ -290,7 +291,7 @@ By editing your `.storybook/preview.js`.
 ```js
 import React from 'react';
 import { addons } from 'storybook/preview-api';
-import { DocsContainer } from '@storybook/addon-docs';
+import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { themes } from 'storybook/theming';
 
 import {
