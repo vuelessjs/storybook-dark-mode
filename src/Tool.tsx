@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { global } from '@storybook/global';
-import { themes, ThemeVars } from 'storybook/theming';
-import { IconButton } from 'storybook/internal/components';
-import { MoonIcon, SunIcon } from '@storybook/icons';
-import { STORY_CHANGED, SET_STORIES, DOCS_RENDERED } from 'storybook/internal/core-events';
-import { API, useParameter } from 'storybook/manager-api';
-import equal from 'fast-deep-equal';
-import { DARK_MODE_EVENT_NAME, UPDATE_DARK_MODE_EVENT_NAME } from './constants';
+import * as React from "react";
+import { global } from "@storybook/global";
+import { themes, ThemeVars } from "storybook/theming";
+import { IconButton } from "storybook/internal/components";
+import { MoonIcon, SunIcon } from "@storybook/icons";
+import { STORY_CHANGED, SET_STORIES, DOCS_RENDERED } from "storybook/internal/core-events";
+import { API, useParameter } from "storybook/manager-api";
+import equal from "fast-deep-equal";
+import { DARK_MODE_EVENT_NAME, UPDATE_DARK_MODE_EVENT_NAME } from "./constants";
 
 const { document, window } = global as { document: Document; window: Window };
 
-type Mode = 'light' | 'dark';
+type Mode = "light" | "dark";
 
 interface DarkModeStore {
   /** The class target in the preview iframe */
@@ -31,16 +31,16 @@ interface DarkModeStore {
   userHasExplicitlySetTheTheme: boolean;
 }
 
-const STORAGE_KEY = 'sb-addon-themes-3';
+const STORAGE_KEY = "sb-addon-themes-3";
 
-export const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)');
+export const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)");
 
-const defaultParams: Required<Omit<DarkModeStore, 'current'>> = {
-  classTarget: 'body',
+const defaultParams: Required<Omit<DarkModeStore, "current">> = {
+  classTarget: "body",
   dark: themes.dark,
-  darkClass: ['dark'],
+  darkClass: ["dark"],
   light: themes.light,
-  lightClass: ['light'],
+  lightClass: ["light"],
   stylePreview: false,
   userHasExplicitlySetTheTheme: false,
 };
@@ -59,7 +59,7 @@ const toggleDarkClass = (
     lightClass = defaultParams.lightClass,
   }: DarkModeStore,
 ) => {
-  if (current === 'dark') {
+  if (current === "dark") {
     el.classList.remove(...arrayify(lightClass));
     el.classList.add(...arrayify(darkClass));
   } else {
@@ -77,7 +77,7 @@ const arrayify = (classes: string | string[]): string[] => {
 
 /** Update the preview iframe class */
 const updatePreview = (store: DarkModeStore) => {
-  const iframe = document.getElementById('storybook-preview-iframe') as HTMLIFrameElement;
+  const iframe = document.getElementById("storybook-preview-iframe") as HTMLIFrameElement;
 
   if (!iframe) {
     return;
@@ -108,7 +108,7 @@ const updateManager = (store: DarkModeStore) => {
 export const store = (userTheme: Partial<DarkModeStore> = {}): DarkModeStore => {
   const storedItem = window.localStorage.getItem(STORAGE_KEY);
 
-  if (typeof storedItem === 'string') {
+  if (typeof storedItem === "string") {
     const stored = JSON.parse(storedItem) as DarkModeStore;
 
     if (userTheme) {
@@ -142,7 +142,7 @@ interface DarkModeProps {
 /** A toolbar icon to toggle between dark and light themes in storybook */
 export function DarkMode({ api }: DarkModeProps) {
   const [isDark, setDark] = React.useState(prefersDark.matches);
-  const darkModeParams = useParameter<Partial<DarkModeStore>>('darkMode', {});
+  const darkModeParams = useParameter<Partial<DarkModeStore>>("darkMode", {});
   const { current: defaultMode, stylePreview, ...params } = darkModeParams;
   const channel = api.getChannel();
   // Save custom themes on init
@@ -156,8 +156,8 @@ export function DarkMode({ api }: DarkModeProps) {
       const currentStore = store();
 
       api.setOptions({ theme: currentStore[mode] });
-      setDark(mode === 'dark');
-      api.getChannel().emit(DARK_MODE_EVENT_NAME, mode === 'dark');
+      setDark(mode === "dark");
+      api.getChannel().emit(DARK_MODE_EVENT_NAME, mode === "dark");
       updateManager(currentStore);
 
       if (stylePreview) {
@@ -171,7 +171,7 @@ export function DarkMode({ api }: DarkModeProps) {
   const updateMode = React.useCallback(
     (mode?: Mode) => {
       const currentStore = store();
-      const current = mode || (currentStore.current === 'dark' ? 'light' : 'dark');
+      const current = mode || (currentStore.current === "dark" ? "light" : "dark");
 
       updateStore({ ...currentStore, current });
       setMode(current);
@@ -185,12 +185,12 @@ export function DarkMode({ api }: DarkModeProps) {
       return;
     }
 
-    updateMode(event.matches ? 'dark' : 'light');
+    updateMode(event.matches ? "dark" : "light");
   }
 
   /** Render the current theme */
   const renderTheme = React.useCallback(() => {
-    const { current = 'light' } = store();
+    const { current = "light" } = store();
 
     setMode(current);
   }, [setMode]);
@@ -247,14 +247,14 @@ export function DarkMode({ api }: DarkModeProps) {
     if (defaultMode) {
       updateMode(defaultMode);
     } else if (prefersDark.matches) {
-      updateMode('dark');
+      updateMode("dark");
     }
   }, [defaultMode, updateMode, userHasExplicitlySetTheTheme]);
 
   return (
     <IconButton
       key="dark-mode"
-      title={isDark ? 'Change theme to light mode' : 'Change theme to dark mode'}
+      title={isDark ? "Change theme to light mode" : "Change theme to dark mode"}
       onClick={handleIconClick}
     >
       {isDark ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />}

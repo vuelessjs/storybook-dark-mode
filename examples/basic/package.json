@@ -1,5 +1,6 @@
 {
   "name": "basic",
+  "type": "module",
   "private": true,
   "scripts": {
     "start": "../../node_modules/.bin/storybook dev",

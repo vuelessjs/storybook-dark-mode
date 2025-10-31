@@ -1,3 +1,5 @@
+import { fileURLToPath } from "node:url";
+
 export function managerEntries(entry: string[] = []) {
-  return [...entry, import.meta.resolve('./manager')];
+  return [...entry, fileURLToPath(import.meta.resolve("./manager"))];
 }

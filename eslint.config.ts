@@ -13,8 +13,6 @@ const languageOptions = {
     ...globals.browser,
   },
   parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: "module",
     ecmaFeatures: {
       jsx: true,
     },
@@ -51,7 +49,7 @@ export default ts.config(
         { blankLine: "always", prev: "*", next: "block-like" },
         { blankLine: "always", prev: "*", next: "return" },
       ],
-      "prettier/prettier": ["warn", { printWidth: 100, singleQuote: true }],
+      "prettier/prettier": ["warn", { printWidth: 100, singleQuote: false }],
       "@stylistic/max-len": ["error", { code: 120, ignoreComments: true, ignoreUrls: true }],
       "react/prop-types": 0,
       "react/jsx-tag-spacing": 0,
@@ -73,11 +71,10 @@ export default ts.config(
     name: "eslint-config",
     files: ["eslint.config.*"],
     rules: {
-      "prettier/prettier": ["warn", { printWidth: 120 }],
+      "prettier/prettier": ["warn", { printWidth: 120, singleQuote: false }],
     },
   },
   {
     ignores: ["node_modules", "dist"],
   },
 );
-
