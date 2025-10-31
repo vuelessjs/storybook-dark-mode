@@ -1,3 +1,29 @@
+# v9.0.10 (Fri Oct 31 2025)
+
+:tada: This release contains work from a new contributor! :tada:
+
+Thank you, Cedric Nicoloso ([@cedric25](https://github.com/cedric25)), for all your work!
+
+#### 🐛 Bug Fix
+
+- docs: update DocsContainer import [#16](https://github.com/vuelessjs/storybook-dark-mode/pull/16) ([@cedric25](https://github.com/cedric25))
+
+#### ⚠️ Pushed to `main`
+
+- Bump vite from 7.1.4 to 7.1.11 ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+#### 🔩 Dependency Updates
+
+- Bump vite from 7.1.4 to 7.1.7 [#13](https://github.com/vuelessjs/storybook-dark-mode/pull/13) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+
+#### Authors: 3
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Cedric Nicoloso ([@cedric25](https://github.com/cedric25))
+- Johnny Grid ([@itsJohnnyGrid](https://github.com/itsJohnnyGrid))
+
+---
+
 # v9.0.9 (Wed Oct 01 2025)
 
 :tada: This release contains work from a new contributor! :tada:
