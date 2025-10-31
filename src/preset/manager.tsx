@@ -1,12 +1,12 @@
-import { addons } from 'storybook/manager-api';
-import { Addon_TypesEnum } from 'storybook/internal/types';
-import { themes } from 'storybook/theming';
-import * as React from 'react';
+import { addons } from "storybook/manager-api";
+import { Addon_TypesEnum } from "storybook/internal/types";
+import { themes } from "storybook/theming";
+import * as React from "react";
 
-import Tool, { prefersDark, store } from '../Tool';
+import Tool, { prefersDark, store } from "../Tool";
 
 const currentStore = store();
-const currentTheme = currentStore.current || (prefersDark.matches && 'dark') || 'light';
+const currentTheme = currentStore.current || (prefersDark.matches && "dark") || "light";
 
 addons.setConfig({
   theme: {
@@ -15,11 +15,11 @@ addons.setConfig({
   },
 });
 
-addons.register('storybook/dark-mode', (api) => {
-  addons.add('storybook/dark-mode', {
-    title: 'dark mode',
+addons.register("storybook/dark-mode", (api) => {
+  addons.add("storybook/dark-mode", {
+    title: "dark mode",
     type: Addon_TypesEnum.TOOL,
-    match: ({ viewMode }) => viewMode === 'story' || viewMode === 'docs',
+    match: ({ viewMode }) => viewMode === "story" || viewMode === "docs",
     render: () => <Tool api={api} />,
   });
 });

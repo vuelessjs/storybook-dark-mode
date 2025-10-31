@@ -2,27 +2,6 @@
   "name": "@vueless/storybook-dark-mode",
   "version": "10.0.1-beta.0",
   "description": "Toggle between light and dark mode in Storybook",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./preview": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    },
-    "./preset": "./dist/preset.js",
-    "./manager": "./dist/manager.js",
-    "./package.json": "./package.json"
-  },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "src",
-    "dist",
-    "preset.ts"
-  ],
   "author": "Johnny Grid <hello@vueless.com> (https://vueless.com)",
   "repository": {
     "type": "git",
@@ -36,8 +15,8 @@
     "prebuild": "npm run clean",
     "build": "tsup",
     "build:watch": "tsup --watch",
-    "lint": "eslint --no-fix src/",
-    "lint:fix": "eslint --fix src/",
+    "lint": "eslint --no-fix .",
+    "lint:fix": "eslint --fix .",
     "lint:ci": "eslint --no-fix src/ --max-warnings=0",
     "release:beta": "release-it --increment=prerelease --preRelease=beta --ci --no-git.tag --no-github.release",
     "release:patch": "release-it patch --ci",
@@ -79,8 +58,29 @@
     "vite": "^7.1.11"
   },
   "peerDependencies": {
-    "storybook": "^10.0.0"
+    "storybook": "^9.0.0 || ^10.0.0"
   },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./preview": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./preset": "./dist/preset.js",
+    "./manager": "./dist/manager.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist",
+    "preset.js"
+  ],
   "bundler": {
     "managerEntries": [
       "src/preset/manager.tsx"
@@ -100,6 +100,10 @@
   },
   "keywords": [
     "storybook-addon",
-    "appearance"
+    "appearance",
+    "storybook",
+    "vueless",
+    "dark mode",
+    "color mode"
   ]
 }
