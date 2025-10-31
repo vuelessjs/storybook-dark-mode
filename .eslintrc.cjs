@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   env: { browser: true },
-  ignorePatterns: ['node_modules', 'dist', '.eslintrc.js'],
+  ignorePatterns: ['node_modules', 'dist', '.eslintrc.cjs'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
