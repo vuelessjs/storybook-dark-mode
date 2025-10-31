@@ -36,8 +36,13 @@
     "prebuild": "npm run clean",
     "build": "tsup",
     "build:watch": "tsup --watch",
-    "lint": "eslint --ext .ts --ext .tsx src/**",
-    "release": "auto shipit"
+    "lint": "eslint --no-fix src/",
+    "lint:fix": "eslint --fix src/",
+    "lint:ci": "eslint --no-fix src/ --max-warnings=0",
+    "release:beta": "release-it --increment=prerelease --preRelease=beta --ci --no-git.tag --no-github.release",
+    "release:patch": "release-it patch --ci",
+    "release:minor": "release-it minor --ci",
+    "release:major": "release-it major --ci"
   },
   "dependencies": {
     "@storybook/global": "^5.0.0",
@@ -45,32 +50,32 @@
     "memoizerific": "^1.11.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@release-it/bumper": "^7.0.5",
+    "@release-it/conventional-changelog": "^10.0.1",
     "@storybook/builder-vite": "^10.0.0",
     "@storybook/icons": "^1.4.0",
     "@storybook/react": "^10.0.0",
     "@storybook/react-vite": "^10.0.0",
+    "@stylistic/eslint-plugin": "^5.2.3",
     "@types/node": "^24.3.0",
     "@types/react": "^18.0.26",
-    "@typescript-eslint/eslint-plugin": "5.45.1",
-    "@typescript-eslint/parser": "5.45.1",
-    "all-contributors-cli": "^6.26.1",
-    "auto": "^11.3.0",
-    "auto-config-hipstersmoothie": "^4.0.0",
-    "concurrently": "^7.6.0",
-    "eslint": "8.29.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-config-xo": "0.43.1",
-    "eslint-config-xo-react": "0.27.0",
-    "eslint-plugin-react": "7.31.11",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "prettier": "^2.8.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "globals": "^15.14.0",
+    "prettier": "^3.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "release-it": "^19.0.4",
     "rimraf": "^3.0.2",
     "storybook": "^10.0.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.0",
     "typescript": "^5.9.2",
+    "typescript-eslint": "^8.40.0",
     "vite": "^7.1.11"
   },
   "peerDependencies": {
@@ -86,9 +91,6 @@
     "nodeEntries": [
       "src/preset.ts"
     ]
-  },
-  "auto": {
-    "extends": "hipstersmoothie"
   },
   "prettier": {
     "singleQuote": true

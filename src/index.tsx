@@ -10,7 +10,9 @@ export function useDarkMode(): boolean {
 
   useEffect(() => {
     const chan = addons.getChannel();
+
     chan.on(DARK_MODE_EVENT_NAME, setIsDark);
+
     return () => chan.off(DARK_MODE_EVENT_NAME, setIsDark);
   }, []);
 

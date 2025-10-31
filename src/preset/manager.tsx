@@ -6,8 +6,7 @@ import * as React from 'react';
 import Tool, { prefersDark, store } from '../Tool';
 
 const currentStore = store();
-const currentTheme =
-  currentStore.current || (prefersDark.matches && 'dark') || 'light';
+const currentTheme = currentStore.current || (prefersDark.matches && 'dark') || 'light';
 
 addons.setConfig({
   theme: {

@@ -2,7 +2,7 @@ import { defineConfig, type Options } from "tsup";
 
 const NODE_TARGET = "node20.19";
 
-export default defineConfig(async (options) => {
+export default defineConfig(async (_options) => {
   const packageJson = (
     await import("./package.json", { with: { type: "json" } })
   ).default;
