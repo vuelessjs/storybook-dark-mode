@@ -8,11 +8,13 @@
     "incremental": false,
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["es2017", "dom"],
-    "module": "commonjs",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "noImplicitAny": true,
-    "rootDir": "./src",
+    "rootDir": ".",
     "skipLibCheck": true,
-    "target": "es5"
-  }
+    "target": "esnext"
+  },
+  "include": ["src/**/*", "tsup.config.ts"]
 }

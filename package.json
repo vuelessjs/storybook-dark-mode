@@ -1,14 +1,27 @@
 {
   "name": "@vueless/storybook-dark-mode",
-  "version": "9.0.9",
+  "version": "10.0.0",
   "description": "Toggle between light and dark mode in Storybook",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/ts/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./preview": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./preset": "./dist/preset.js",
+    "./manager": "./dist/manager.js",
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "src",
     "dist",
-    "preset.js"
+    "preset.ts"
   ],
   "author": "Johnny Grid <hello@vueless.com> (https://vueless.com)",
   "repository": {
@@ -20,31 +33,22 @@
   },
   "scripts": {
     "clean": "rimraf ./dist",
-    "buildBabel": "concurrently \"npm run buildBabel:cjs\" \"npm run buildBabel:esm\"",
-    "buildBabel:cjs": "babel ./src -d ./dist/cjs --extensions \".js,.jsx,.ts,.tsx\"",
-    "buildBabel:esm": "babel ./src -d ./dist/esm --env-name esm --extensions \".js,.jsx,.ts,.tsx\"",
-    "buildTsc": "tsc --declaration --emitDeclarationOnly --outDir ./dist/ts -p tsconfig.build.json",
     "prebuild": "npm run clean",
-    "build": "concurrently \"npm run buildBabel\" \"npm run buildTsc\"",
-    "build:watch": "concurrently \"npm run buildBabel:esm -- --watch\" \"npm run buildTsc -- --watch\"",
+    "build": "tsup",
+    "build:watch": "tsup --watch",
     "lint": "eslint --ext .ts --ext .tsx src/**",
     "release": "auto shipit"
   },
   "dependencies": {
     "@storybook/global": "^5.0.0",
-    "@storybook/icons": "^1.4.0",
     "fast-deep-equal": "^3.1.3",
     "memoizerific": "^1.11.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.3",
-    "@babel/preset-env": "^7.28.3",
-    "@babel/preset-react": "^7.27.1",
-    "@babel/preset-typescript": "^7.27.1",
-    "@storybook/builder-vite": "^9.1.3",
-    "@storybook/react": "^9.1.3",
-    "@storybook/react-vite": "^9.1.3",
+    "@storybook/builder-vite": "^10.0.0",
+    "@storybook/icons": "^1.4.0",
+    "@storybook/react": "^10.0.0",
+    "@storybook/react-vite": "^10.0.0",
     "@types/node": "^24.3.0",
     "@types/react": "^18.0.26",
     "@typescript-eslint/eslint-plugin": "5.45.1",
@@ -52,7 +56,6 @@
     "all-contributors-cli": "^6.26.1",
     "auto": "^11.3.0",
     "auto-config-hipstersmoothie": "^4.0.0",
-    "babel-loader": "^10.0.0",
     "concurrently": "^7.6.0",
     "eslint": "8.29.0",
     "eslint-config-prettier": "8.5.0",
@@ -64,10 +67,25 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
-    "storybook": "^9.1.3",
+    "storybook": "^10.0.0",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.0",
     "typescript": "^5.9.2",
     "vite": "^7.1.11"
+  },
+  "peerDependencies": {
+    "storybook": "^10.0.0"
+  },
+  "bundler": {
+    "managerEntries": [
+      "src/preset/manager.tsx"
+    ],
+    "previewEntries": [
+      "src/index.tsx"
+    ],
+    "nodeEntries": [
+      "src/preset.ts"
+    ]
   },
   "auto": {
     "extends": "hipstersmoothie"
@@ -79,7 +97,7 @@
     "node": ">=20"
   },
   "keywords": [
-    "storybook-addons",
+    "storybook-addon",
     "appearance"
   ]
 }
