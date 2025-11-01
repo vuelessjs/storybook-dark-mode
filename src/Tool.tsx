@@ -3,10 +3,15 @@ import { global } from "@storybook/global";
 import { themes, ThemeVars } from "storybook/theming";
 import { IconButton } from "storybook/internal/components";
 import { MoonIcon, SunIcon } from "@storybook/icons";
-import { STORY_CHANGED, SET_STORIES, DOCS_RENDERED } from "storybook/internal/core-events";
 import { API, useParameter } from "storybook/manager-api";
 import equal from "fast-deep-equal";
-import { DARK_MODE_EVENT_NAME, UPDATE_DARK_MODE_EVENT_NAME } from "./constants";
+import {
+  SET_STORIES,
+  DOCS_RENDERED,
+  STORY_CHANGED,
+  DARK_MODE_EVENT_NAME,
+  UPDATE_DARK_MODE_EVENT_NAME,
+} from "./constants";
 
 const { document, window } = global as { document: Document; window: Window };
 
