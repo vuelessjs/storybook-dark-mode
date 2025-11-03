@@ -58,7 +58,7 @@
     "vite": "^7.1.11"
   },
   "peerDependencies": {
-    "storybook": "^9.0.0 || ^10.0.0"
+    "storybook": "^10.0.0"
   },
   "type": "module",
   "main": "dist/index.js",
