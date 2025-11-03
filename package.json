@@ -83,13 +83,13 @@
   ],
   "bundler": {
     "managerEntries": [
-      "src/preset/manager.tsx"
+      "./src/preset/manager.tsx"
     ],
     "previewEntries": [
-      "src/index.tsx"
+      "./src/index.tsx"
     ],
     "nodeEntries": [
-      "src/preset.ts"
+      "./src/preset.ts"
     ]
   },
   "prettier": {

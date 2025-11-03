@@ -14,7 +14,17 @@ export default defineConfig(async (_options) => {
     format: ["esm"],
     treeshake: true,
     clean: false,
-    external: ["react", "react-dom", "@storybook/icons"],
+    external: [
+      "react",
+      "react-dom",
+      "@storybook/icons",
+      "@storybook/global",
+      "storybook/internal/core-events",
+      "storybook/internal/components",
+      "storybook/manager-api",
+      "storybook/preview-api",
+      "storybook/theming",
+    ],
   };
 
   const configs: Options[] = [];

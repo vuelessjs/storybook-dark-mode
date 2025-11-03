@@ -1,143 +1,18 @@
 import * as React from "react";
-import { global } from "@storybook/global";
-import { themes, ThemeVars } from "storybook/theming";
 import { IconButton } from "storybook/internal/components";
 import { MoonIcon, SunIcon } from "@storybook/icons";
 import { API, useParameter } from "storybook/manager-api";
-import equal from "fast-deep-equal";
+import { SET_STORIES, DOCS_RENDERED, STORY_CHANGED } from "storybook/internal/core-events";
+import { DARK_MODE_EVENT_NAME, UPDATE_DARK_MODE_EVENT_NAME } from "./constants";
 import {
-  SET_STORIES,
-  DOCS_RENDERED,
-  STORY_CHANGED,
-  DARK_MODE_EVENT_NAME,
-  UPDATE_DARK_MODE_EVENT_NAME,
-} from "./constants";
-
-const { document, window } = global as { document: Document; window: Window };
-
-type Mode = "light" | "dark";
-
-interface DarkModeStore {
-  /** The class target in the preview iframe */
-  classTarget: string;
-  /** The current mode the storybook is set to */
-  current: Mode;
-  /** The dark theme for storybook */
-  dark: ThemeVars;
-  /** The dark class name for the preview iframe */
-  darkClass: string | string[];
-  /** The light theme for storybook */
-  light: ThemeVars;
-  /** The light class name for the preview iframe */
-  lightClass: string | string[];
-  /** Apply mode to iframe */
-  stylePreview: boolean;
-  /** Persist if the user has set the theme */
-  userHasExplicitlySetTheTheme: boolean;
-}
-
-const STORAGE_KEY = "sb-addon-themes-3";
-
-export const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)");
-
-const defaultParams: Required<Omit<DarkModeStore, "current">> = {
-  classTarget: "body",
-  dark: themes.dark,
-  darkClass: ["dark"],
-  light: themes.light,
-  lightClass: ["light"],
-  stylePreview: false,
-  userHasExplicitlySetTheTheme: false,
-};
-
-/** Persist the dark mode settings in localStorage */
-export const updateStore = (newStore: DarkModeStore) => {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newStore));
-};
-
-/** Add the light/dark class to an element */
-const toggleDarkClass = (
-  el: Element,
-  {
-    current,
-    darkClass = defaultParams.darkClass,
-    lightClass = defaultParams.lightClass,
-  }: DarkModeStore,
-) => {
-  if (current === "dark") {
-    el.classList.remove(...arrayify(lightClass));
-    el.classList.add(...arrayify(darkClass));
-  } else {
-    el.classList.remove(...arrayify(darkClass));
-    el.classList.add(...arrayify(lightClass));
-  }
-};
-
-/** Coerce a string to a single item array, or return an array as-is */
-const arrayify = (classes: string | string[]): string[] => {
-  const arr: string[] = [];
-
-  return arr.concat(classes).map((item) => item);
-};
-
-/** Update the preview iframe class */
-const updatePreview = (store: DarkModeStore) => {
-  const iframe = document.getElementById("storybook-preview-iframe") as HTMLIFrameElement;
-
-  if (!iframe) {
-    return;
-  }
-
-  const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
-  const target = iframeDocument?.querySelector<HTMLElement>(store.classTarget);
-
-  if (!target) {
-    return;
-  }
-
-  toggleDarkClass(target, store);
-};
-
-/** Update the manager iframe class */
-const updateManager = (store: DarkModeStore) => {
-  const manager = document.querySelector(store.classTarget);
-
-  if (!manager) {
-    return;
-  }
-
-  toggleDarkClass(manager, store);
-};
-
-/** Update changed dark mode settings and persist to localStorage  */
-export const store = (userTheme: Partial<DarkModeStore> = {}): DarkModeStore => {
-  const storedItem = window.localStorage.getItem(STORAGE_KEY);
-
-  if (typeof storedItem === "string") {
-    const stored = JSON.parse(storedItem) as DarkModeStore;
-
-    if (userTheme) {
-      if (userTheme.dark && !equal(stored.dark, userTheme.dark)) {
-        stored.dark = userTheme.dark;
-        updateStore(stored);
-      }
-
-      if (userTheme.light && !equal(stored.light, userTheme.light)) {
-        stored.light = userTheme.light;
-        updateStore(stored);
-      }
-    }
-
-    return stored;
-  }
-
-  return { ...defaultParams, ...userTheme } as DarkModeStore;
-};
-
-// On initial load, set the dark mode class on the manager
-// This is needed if you're using mostly CSS overrides to styles the storybook
-// Otherwise the default theme is set in src/preset/manager.tsx
-updateManager(store());
+  store,
+  prefersDark,
+  updateStore,
+  updateManager,
+  updatePreview,
+  type DarkModeStore,
+  type Mode,
+} from "./store";
 
 interface DarkModeProps {
   /** The storybook API */
