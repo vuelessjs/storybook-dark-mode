@@ -1,0 +1,11 @@
+{
+  "name": "basic",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "storybook dev",
+    "build": "storybook build"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}
