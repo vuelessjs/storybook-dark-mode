@@ -3,6 +3,13 @@ name: Release Workflow
 on:
   workflow_dispatch:
     inputs:
+      version:
+        description: 'Version to release'
+        required: true
+        type: choice
+        options:
+          - v10
+          - v9
       release_type:
         description: 'Type of release'
         required: true
@@ -59,10 +66,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  release:
-    name: "Release: ${{ github.event.inputs.release_type }}"
-    if: github.event_name == 'workflow_dispatch' && github.ref_name == 'main'
-    needs: [lint]
+  release-v9:
+    name: "Release v9: ${{ github.event.inputs.release_type }}"
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.version == 'v9' && github.ref_name == 'main-v9'
+    needs: [ lint ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -70,6 +77,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main-v9
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org/
+      - run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - run: npm install -g npm@latest
+      - run: npm ci --legacy-peer-deps
+      - run: npm run build
+      - run: npm run release:${{ github.event.inputs.release_type }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release-v10:
+    name: "Release v10: ${{ github.event.inputs.release_type }}"
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.version == 'v10' && github.ref_name == 'main'
+    needs: [ lint ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
@@ -88,8 +124,8 @@ jobs:
 
   update-beta:
     name: 'Update Beta'
-    if: github.event_name == 'workflow_dispatch' && github.ref_name == 'main'
-    needs: [ release ]
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.version == 'v10' && github.ref_name == 'main'
+    needs: [ release-v10 ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
