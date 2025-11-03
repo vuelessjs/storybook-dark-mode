@@ -1,6 +1,6 @@
 # Storybook Dark Mode
 
-A Storybook v10-optimized addon that enables users to toggle between dark and light modes. For support with earlier Storybook versions, see the [original addon](https://github.com/hipstersmoothie/storybook-dark-mode).
+A Storybook v9 and v10 optimized addon that enables users to toggle between dark and light modes. For support with earlier Storybook versions, see the [original addon](https://github.com/hipstersmoothie/storybook-dark-mode).
 
 The project is supported and maintained by the [Vueless UI](https://github.com/vuelessjs/vueless) core team. | [See the demo](https://ui.vueless.com) 🌗
 
@@ -11,7 +11,11 @@ The project is supported and maintained by the [Vueless UI](https://github.com/v
 Install the following npm module:
 
 ```sh
+# for Storybook v10
 npm i -D @vueless/storybook-dark-mode
+
+# for Storybook v9
+npm i -D @vueless/storybook-dark-mode@^9
 ```
 
 Then, add following content to `.storybook/main.js`
