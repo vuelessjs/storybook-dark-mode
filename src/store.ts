@@ -1,6 +1,6 @@
 import { global } from "@storybook/global";
 import { themes, ThemeVars } from "storybook/theming";
-import equal from "fast-deep-equal";
+import { isEqual } from "lodash-es";
 
 const { document, window } = global as { document: Document; window: Window };
 
@@ -92,12 +92,12 @@ export const store = (userTheme: Partial<DarkModeStore> = {}): DarkModeStore => 
     const stored = JSON.parse(storedItem) as DarkModeStore;
 
     if (userTheme) {
-      if (userTheme.dark && !equal(stored.dark, userTheme.dark)) {
+      if (userTheme.dark && !isEqual(stored.dark, userTheme.dark)) {
         stored.dark = userTheme.dark;
         updateStore(stored);
       }
 
-      if (userTheme.light && !equal(stored.light, userTheme.light)) {
+      if (userTheme.light && !isEqual(stored.light, userTheme.light)) {
         stored.light = userTheme.light;
         updateStore(stored);
       }
