@@ -1,6 +1,6 @@
 {
   "name": "@vueless/storybook-dark-mode",
-  "version": "10.0.2",
+  "version": "10.0.3-beta.0",
   "description": "Toggle between light and dark mode in Storybook",
   "author": "Johnny Grid <hello@vueless.com> (https://vueless.com)",
   "repository": {
