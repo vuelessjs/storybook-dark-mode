@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { useDarkMode } from "../../../src";
+import { useDarkMode } from "../../src";
 
 function TestComponent() {
   const isDark = useDarkMode();

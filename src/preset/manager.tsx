@@ -3,7 +3,8 @@ import { Addon_TypesEnum } from "storybook/internal/types";
 import { themes } from "storybook/theming";
 import * as React from "react";
 
-import Tool, { prefersDark, store } from "../Tool";
+import Tool from "../Tool";
+import { prefersDark, store } from "../store";
 
 const currentStore = store();
 const currentTheme = currentStore.current || (prefersDark.matches && "dark") || "light";
@@ -15,8 +16,8 @@ addons.setConfig({
   },
 });
 
-addons.register("storybook/dark-mode", (api) => {
-  addons.add("storybook/dark-mode", {
+addons.register("@vueless/storybook-dark-mode", (api) => {
+  addons.add("@vueless/storybook-dark-mode", {
     title: "dark mode",
     type: Addon_TypesEnum.TOOL,
     match: ({ viewMode }) => viewMode === "story" || viewMode === "docs",
