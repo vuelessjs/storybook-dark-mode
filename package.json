@@ -105,5 +105,9 @@
     "vueless",
     "dark mode",
     "color mode"
-  ]
+  ],
+  "storybook": {
+    "displayName": "Dark Mode",
+    "icon": ""
+  }
 }
