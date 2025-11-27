@@ -108,6 +108,6 @@
   ],
   "storybook": {
     "displayName": "Dark Mode",
-    "icon": ""
+    "icon": "https://raw.githubusercontent.com/vuelessjs/storybook-dark-mode/refs/heads/main/public/logo.png"
   }
 }

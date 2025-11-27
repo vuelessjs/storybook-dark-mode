@@ -4,7 +4,7 @@ A Storybook v9 and v10 optimized addon that enables users to toggle between dark
 
 The project is supported and maintained by the [Vueless UI](https://github.com/vuelessjs/vueless) core team. | [See the demo](https://ui.vueless.com) 🌗
 
-![Example](./example.gif)
+![Example](https://raw.githubusercontent.com/vuelessjs/storybook-dark-mode/refs/heads/main/public/example.gif)
 
 ## Installation
 
