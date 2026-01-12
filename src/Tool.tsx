@@ -137,7 +137,7 @@ export function DarkMode({ api }: DarkModeProps) {
       variant="ghost"
       padding="small"
       title={isDark ? "Change theme to light mode" : "Change theme to dark mode"}
-      aria-label={isDark ? "Change theme to light mode" : "Change theme to dark mode"}
+      ariaLabel={isDark ? "Change theme to light mode" : "Change theme to dark mode"}
       onClick={handleIconClick}
     >
       {isDark ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />}
