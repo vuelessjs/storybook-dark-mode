@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IconButton } from "storybook/internal/components";
+import { Button } from "storybook/internal/components";
 import { MoonIcon, SunIcon } from "@storybook/icons";
 import { API, useParameter } from "storybook/manager-api";
 import { SET_STORIES, DOCS_RENDERED, STORY_CHANGED } from "storybook/internal/core-events";
@@ -132,13 +132,16 @@ export function DarkMode({ api }: DarkModeProps) {
   }, [defaultMode, updateMode, userHasExplicitlySetTheTheme]);
 
   return (
-    <IconButton
+    <Button
       key="dark-mode"
+      variant="ghost"
+      padding="small"
       title={isDark ? "Change theme to light mode" : "Change theme to dark mode"}
+      aria-label={isDark ? "Change theme to light mode" : "Change theme to dark mode"}
       onClick={handleIconClick}
     >
       {isDark ? <SunIcon aria-hidden="true" /> : <MoonIcon aria-hidden="true" />}
-    </IconButton>
+    </Button>
   );
 }
 
