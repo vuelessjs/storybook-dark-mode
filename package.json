@@ -25,12 +25,12 @@
   },
   "dependencies": {
     "@storybook/global": "^5.0.0",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.23"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@release-it/bumper": "^7.0.5",
-    "@release-it/conventional-changelog": "^10.0.1",
+    "@release-it/conventional-changelog": "^10.0.4",
     "@storybook/builder-vite": "^10.0.4",
     "@storybook/icons": "^1.4.0",
     "@storybook/react": "^10.0.4",
@@ -48,7 +48,7 @@
     "prettier": "^3.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "release-it": "^19.0.6",
+    "release-it": "^19.2.4",
     "rimraf": "^3.0.2",
     "storybook": "^10.0.4",
     "ts-node": "^10.9.2",
