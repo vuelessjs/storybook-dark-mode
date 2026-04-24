@@ -59,7 +59,7 @@ jobs:
       - run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - run: npm install -g npm@latest
+      - run: npm install -g npm@~11.10.0
       - run: npm ci --legacy-peer-deps
       - run: npm run build
       - run: npm run release:beta
@@ -87,7 +87,7 @@ jobs:
       - run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - run: npm install -g npm@latest
+      - run: npm install -g npm@~11.10.0
       - run: npm ci --legacy-peer-deps
       - run: npm run build
       - run: npm run release:${{ github.event.inputs.release_type }}
@@ -115,7 +115,7 @@ jobs:
       - run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - run: npm install -g npm@latest
+      - run: npm install -g npm@~11.10.0
       - run: npm ci --legacy-peer-deps
       - run: npm run build
       - run: npm run release:${{ github.event.inputs.release_type }}
