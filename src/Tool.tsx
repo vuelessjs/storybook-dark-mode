@@ -21,10 +21,14 @@ interface DarkModeProps {
 
 /** A toolbar icon to toggle between dark and light themes in storybook */
 export function DarkMode({ api }: DarkModeProps) {
-  const [isDark, setDark] = React.useState(prefersDark.matches);
+  const [isDark, setDark] = React.useState(() => store().current === "dark");
   const darkModeParams = useParameter<Partial<DarkModeStore>>("darkMode", {});
   const { current: defaultMode, stylePreview, ...params } = darkModeParams;
   const channel = api.getChannel();
+  const darkModeParamsRef = React.useRef(darkModeParams);
+
+  darkModeParamsRef.current = darkModeParams;
+  const deferredSysThemeRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   // Save custom themes on init
   const userHasExplicitlySetTheTheme = React.useMemo(
     () => store(params).userHasExplicitlySetTheTheme,
@@ -60,13 +64,16 @@ export function DarkMode({ api }: DarkModeProps) {
   );
 
   /** Update the theme based on the color preference */
-  function prefersDarkUpdate(event: MediaQueryListEvent) {
-    if (userHasExplicitlySetTheTheme || defaultMode) {
-      return;
-    }
+  const prefersDarkUpdate = React.useCallback(
+    (event: MediaQueryListEvent) => {
+      if (userHasExplicitlySetTheTheme || defaultMode) {
+        return;
+      }
 
-    updateMode(event.matches ? "dark" : "light");
-  }
+      updateMode(event.matches ? "dark" : "light");
+    },
+    [userHasExplicitlySetTheTheme, defaultMode, updateMode],
+  );
 
   /** Render the current theme */
   const renderTheme = React.useCallback(() => {
@@ -85,17 +92,67 @@ export function DarkMode({ api }: DarkModeProps) {
 
   /** When storybook params change update the stored themes */
   React.useEffect(() => {
-    const currentStore = store();
+    if (deferredSysThemeRef.current !== null) {
+      clearTimeout(deferredSysThemeRef.current);
+      deferredSysThemeRef.current = null;
+    }
 
-    // Ensure we use the stores `current` value first to persist
-    // themeing between page loads and story changes.
-    updateStore({
+    const currentStore = store();
+    const previewCurrent = darkModeParams.current;
+    const persistedCurrent = currentStore.current;
+
+    const base = {
       ...currentStore,
       ...darkModeParams,
-      current: currentStore.current || darkModeParams.current,
-    });
+    };
+
+    if (previewCurrent !== undefined) {
+      updateStore({ ...base, current: previewCurrent });
+      renderTheme();
+
+      return;
+    }
+
+    if (persistedCurrent) {
+      updateStore({ ...base, current: persistedCurrent });
+      renderTheme();
+
+      return;
+    }
+
+    // Preview `darkMode.current` can hydrate after the first commit. Avoid applying
+    // prefers-color-scheme until then so `current: 'light'` is not overwritten.
+    updateStore({ ...base, current: "light" });
     renderTheme();
+
+    deferredSysThemeRef.current = setTimeout(() => {
+      deferredSysThemeRef.current = null;
+      const latestParams = darkModeParamsRef.current;
+
+      if (latestParams.current !== undefined) {
+        const cs = store();
+
+        updateStore({ ...cs, ...latestParams, current: latestParams.current });
+        renderTheme();
+
+        return;
+      }
+
+      const cs = store();
+      const nextCurrent = prefersDark.matches ? "dark" : "light";
+
+      updateStore({ ...cs, ...latestParams, current: nextCurrent });
+      renderTheme();
+    }, 0);
+
+    return () => {
+      if (deferredSysThemeRef.current !== null) {
+        clearTimeout(deferredSysThemeRef.current);
+        deferredSysThemeRef.current = null;
+      }
+    };
   }, [darkModeParams, renderTheme]);
+
   React.useEffect(() => {
     channel.on(STORY_CHANGED, renderTheme);
     channel.on(SET_STORIES, renderTheme);
@@ -108,14 +165,15 @@ export function DarkMode({ api }: DarkModeProps) {
       channel.removeListener(DOCS_RENDERED, renderTheme);
       prefersDark.removeListener(prefersDarkUpdate);
     };
-  });
+  }, [channel, renderTheme, prefersDarkUpdate]);
+
   React.useEffect(() => {
     channel.on(UPDATE_DARK_MODE_EVENT_NAME, updateMode);
 
     return () => {
       channel.removeListener(UPDATE_DARK_MODE_EVENT_NAME, updateMode);
     };
-  });
+  }, [channel, updateMode]);
   // Storybook's first render doesn't have the global user params loaded so we
   // need the effect to run whenever defaultMode is updated
   React.useEffect(() => {
@@ -126,8 +184,6 @@ export function DarkMode({ api }: DarkModeProps) {
 
     if (defaultMode) {
       updateMode(defaultMode);
-    } else if (prefersDark.matches) {
-      updateMode("dark");
     }
   }, [defaultMode, updateMode, userHasExplicitlySetTheTheme]);
 

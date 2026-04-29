@@ -4,10 +4,10 @@ import { themes } from "storybook/theming";
 import * as React from "react";
 
 import Tool from "../Tool";
-import { prefersDark, store } from "../store";
+import { store } from "../store";
 
 const currentStore = store();
-const currentTheme = currentStore.current || (prefersDark.matches && "dark") || "light";
+const currentTheme = currentStore.current ?? "light";
 
 addons.setConfig({
   theme: {
