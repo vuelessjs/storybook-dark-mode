@@ -21,7 +21,11 @@ interface DarkModeProps {
 
 /** A toolbar icon to toggle between dark and light themes in storybook */
 export function DarkMode({ api }: DarkModeProps) {
-  const [isDark, setDark] = React.useState(() => store().current === "dark");
+  const [isDark, setDark] = React.useState(() => {
+    const current = store().current;
+
+    return current === "dark";
+  });
   const darkModeParams = useParameter<Partial<DarkModeStore>>("darkMode", {});
   const { current: defaultMode, stylePreview, ...params } = darkModeParams;
   const channel = api.getChannel();
