@@ -44,7 +44,11 @@ export default defineConfig(async (_options) => {
       entry: previewEntries,
       platform: "browser",
       target: "esnext",
-      dts: true,
+      dts: {
+        compilerOptions: {
+          ignoreDeprecations: "6.0",
+        },
+      },
     });
   }
 
