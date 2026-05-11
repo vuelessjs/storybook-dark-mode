@@ -96,7 +96,7 @@
     "singleQuote": true
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "keywords": [
     "storybook-addon",
