@@ -59,7 +59,6 @@ jobs:
       - run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      # OIDC publishing requires npm v11.5.1 or later.
       - run: npm install -g npm@~11.10.0
       - run: npm ci --legacy-peer-deps
       - run: npm run build
@@ -88,7 +87,6 @@ jobs:
       - run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      # OIDC publishing requires npm v11.5.1 or later.
       - run: npm install -g npm@~11.10.0
       - run: npm ci --legacy-peer-deps
       - run: npm run build
@@ -117,7 +115,6 @@ jobs:
       - run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      # OIDC publishing requires npm v11.5.1 or later.
       - run: npm install -g npm@~11.10.0
       - run: npm ci --legacy-peer-deps
       - run: npm run build
